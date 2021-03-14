@@ -18,11 +18,11 @@ function crearUsuario(req, res, next) {
 function obtenerUsuarios(req, res, next) {                              //Obteniendo usuario desde MongoDB.
   if(req.params.id){
     Usuario.findById(req.params.id).then( usuario =>{
-        res.send(usuario)
+        res.send(usuario.publicData())
     }).catch(next)
 }else {
     Usuario.find().then(usuario =>{
-        res.send(usuario)
+        res.send(usuario.publicData())
     }).catch(next)
 } 
 }

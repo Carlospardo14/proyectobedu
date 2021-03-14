@@ -64,43 +64,6 @@
             }
           }
         },
-        "put": {
-          "tags": [
-            "usuarios"
-          ],
-          "summary": "Modificar un usuario existente",
-          "description": "Modificar un usuario existente",
-          "operationId": "modificarUsuario",
-          "consumes": [
-            "application/json"
-          ],
-          "produces": [
-            "application/json"
-          ],
-          "parameters": [
-            {
-              "in": "body",
-              "name": "body",
-              "description": "Pet object that needs to be added to the store",
-              "required": true,
-              "schema": {
-                "$ref": "#/definitions/Usuario"
-              }
-            }
-          ],
-          "responses": {
-            "400": {
-              "description": "Invalid ID supplied"
-            },
-            "404": {
-              "description": "Usuario no encontrado"
-            },
-            "405": {
-              "description": "Validation exception"
-            }
-          }
-        }
-      },
       "/usuarios/{usuarioID}": {
         "get": {
           "tags": [
@@ -147,6 +110,43 @@
             }
           ]
         },
+        "put": {
+          "tags": [
+            "usuarios"
+          ],
+          "summary": "Modificar un usuario existente",
+          "description": "Modificar un usuario existente",
+          "operationId": "modificarUsuario",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "body",
+              "name": "body",
+              "description": "User object that needs to be added ",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/Usuario"
+              }
+            }
+          ],
+          "responses": {
+            "400": {
+              "description": "Invalid ID supplied"
+            },
+            "404": {
+              "description": "Usuario no encontrado"
+            },
+            "405": {
+              "description": "Validation exception"
+            }
+          }
+        }
+      },
         "delete": {
           "tags": [
             "usuarios"

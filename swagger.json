@@ -64,6 +64,53 @@
             }
           }
         },
+        "get": {
+          "tags": [
+            "usuarios"
+          ],
+          "summary": "Obtener por usuario Id",
+          "description": "",
+          "operationId": "obtenerPorId",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "usuarioID",
+              "in": "path",
+              "description": "ID of pet that needs to be fetched",
+              "required": true,
+              "type": "integer",
+              "maximum": 10,
+              "minimum": 1,
+              "format": "int64"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/Usuario"
+                }
+              }
+            },
+            "400": {
+              "description": "Invalid status value"
+            }
+          },
+          "security": [
+            {
+              "petstore_auth": [
+                "write:pets",
+                "read:pets"
+              ]
+            }
+          ]
+        }
+        
+      },
       "/usuarios/{usuarioID}": {
         "get": {
           "tags": [
@@ -127,7 +174,7 @@
             {
               "in": "body",
               "name": "body",
-              "description": "User object that needs to be added ",
+              "description": "User object that needs to be added to the store",
               "required": true,
               "schema": {
                 "$ref": "#/definitions/Usuario"
@@ -146,7 +193,7 @@
             }
           }
         }
-      },
+        ,
         "delete": {
           "tags": [
             "usuarios"
@@ -220,52 +267,44 @@
               "description": "Invalid input"
             }
           }
-        },"get": {
+        },
+        "put": {
           "tags": [
             "libros"
           ],
-          "summary": "Obtener librospor id",
-          "description": "Obtener librospor id",
-          "operationId": "obtenerLibro",
+          "summary": "Modificar un libro existente",
+          "description": "Modificar un libro existente",
+          "operationId": "modificarLibro",
+          "consumes": [
+            "application/json"
+          ],
           "produces": [
             "application/json"
           ],
           "parameters": [
             {
-              "name": "libroID",
-              "in": "path",
-              "description": "ID of libro that needs to be fetched",
+              "in": "body",
+              "name": "body",
+              "description": "Pet object that needs to be added to the store",
               "required": true,
-              "type": "integer",
-              "maximum": 10,
-              "minimum": 1,
-              "format": "int64"
+              "schema": {
+                "$ref": "#/definitions/Libro"
+              }
             }
           ],
           "responses": {
-            "200": {
-              "description": "successful operation",
-              "schema": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/definitions/Libro"
-                }
-              }
-            },
             "400": {
-              "description": "Invalid status value"
+              "description": "Invalid ID supplied"
+            },
+            "404": {
+              "description": "Libro no encontrado"
+            },
+            "405": {
+              "description": "Validation exception"
             }
-          },
-          "security": [
-            {
-              "petstore_auth": [
-                "write:pets",
-                "read:pets"
-              ]
-            }
-          ]
-        },
-        
+          }
+        }
+      },
       "/libro/{libroID}": {
         "get": {
           "tags": [
@@ -313,43 +352,6 @@
           ]
         }
       },
-      "put": {
-        "tags": [
-          "libros"
-        ],
-        "summary": "Modificar un libro existente",
-        "description": "Modificar un libro existente",
-        "operationId": "modificarLibro",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "description": "Pet object that needs to be added to the store",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Libro"
-            }
-          }
-        ],
-        "responses": {
-          "400": {
-            "description": "Invalid ID supplied"
-          },
-          "404": {
-            "description": "Libro no encontrado"
-          },
-          "405": {
-            "description": "Validation exception"
-          }
-        }
-      }
-    },
       "/intercambios": {
         "post": {
           "tags": [

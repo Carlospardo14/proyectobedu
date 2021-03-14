@@ -220,44 +220,52 @@
               "description": "Invalid input"
             }
           }
-        },
-        "put": {
+        },"get": {
           "tags": [
             "libros"
           ],
-          "summary": "Modificar un libro existente",
-          "description": "Modificar un libro existente",
-          "operationId": "modificarLibro",
-          "consumes": [
-            "application/json"
-          ],
+          "summary": "Obtener librospor id",
+          "description": "Obtener librospor id",
+          "operationId": "obtenerLibro",
           "produces": [
             "application/json"
           ],
           "parameters": [
             {
-              "in": "body",
-              "name": "body",
-              "description": "Pet object that needs to be added to the store",
+              "name": "libroID",
+              "in": "path",
+              "description": "ID of libro that needs to be fetched",
               "required": true,
-              "schema": {
-                "$ref": "#/definitions/Libro"
-              }
+              "type": "integer",
+              "maximum": 10,
+              "minimum": 1,
+              "format": "int64"
             }
           ],
           "responses": {
+            "200": {
+              "description": "successful operation",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/Libro"
+                }
+              }
+            },
             "400": {
-              "description": "Invalid ID supplied"
-            },
-            "404": {
-              "description": "Libro no encontrado"
-            },
-            "405": {
-              "description": "Validation exception"
+              "description": "Invalid status value"
             }
-          }
-        }
-      },
+          },
+          "security": [
+            {
+              "petstore_auth": [
+                "write:pets",
+                "read:pets"
+              ]
+            }
+          ]
+        },
+        
       "/libro/{libroID}": {
         "get": {
           "tags": [
@@ -305,6 +313,43 @@
           ]
         }
       },
+      "put": {
+        "tags": [
+          "libros"
+        ],
+        "summary": "Modificar un libro existente",
+        "description": "Modificar un libro existente",
+        "operationId": "modificarLibro",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Pet object that needs to be added to the store",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Libro"
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Invalid ID supplied"
+          },
+          "404": {
+            "description": "Libro no encontrado"
+          },
+          "405": {
+            "description": "Validation exception"
+          }
+        }
+      }
+    },
       "/intercambios": {
         "post": {
           "tags": [

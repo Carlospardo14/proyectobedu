@@ -15,10 +15,6 @@ app.use(bodyParser.json());
 /*********************** Mongoose Configuration *******************************/
 const mongoose = require("mongoose");
 
-// mongoose.connect(
-//     "mongodb+srv://Charly:Pac26116@cluster0.gyjue.mongodb.net/BookCrossing?retryWrites=true&w=majority"
-// );
-
 var isProduction = process.env.NODE_ENV === 'production';
 
 mongoose.connect(

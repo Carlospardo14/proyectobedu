@@ -6,8 +6,7 @@ const passport = require('passport');
 function crearUsuario(req, res, next) {
   // Instanciaremos un nuevo usuario utilizando la clase usuario
   const body = req.body,
-    password = body.password
-
+  password = body.password
   delete body.password
   const usuario = new Usuario(body)
   usuario.crearPassword(password)
@@ -17,15 +16,18 @@ function crearUsuario(req, res, next) {
 }
 
 function obtenerUsuarios(req, res, next) {                              //Obteniendo usuario desde MongoDB.
-  Usuario.findById(req.usuario.id, (err, user) => {
-    if (!user || err) {
-      return res.sendStatus(401)
-    }
-    return res.json(user.publicData());
-  }).catch(next);
+  if(req.params.id){
+    Usuario.findById(req.params.id).then( usuario =>{
+        res.send(usuario)
+    }).catch(next)
+}else {
+    Usuario.find().then(usuario =>{
+        res.send(usuario)
+    }).catch(next)
+} 
 }
 
-function modificarUsuario(req, res, next) {
+function modificarUsuario(req, res, next) {                   //Modificando Usuario de MongoDB
   console.log(req.usuario)
   Usuario.findById(req.usuario.id).then(user => {
     if (!user) { return res.sendStatus(401); }

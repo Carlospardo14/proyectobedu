@@ -16,15 +16,12 @@ function crearUsuario(req, res, next) {
 }
 
 function obtenerUsuarios(req, res, next) {                              //Obteniendo usuario desde MongoDB.
-  if(req.params.id){
-    Usuario.findById(req.params.id).then( usuario =>{
-        res.send.json(usuario.publicData())
-    }).catch(next)
-}else {
-    Usuario.find().then(usuario =>{
-        res.send.json(usuario.publicData())
-    }).catch(next)
-} 
+  Usuario.findById(req.usuario.id, (err, user) => {
+    if (!user || err) {
+      return res.sendStatus(401)
+    }
+    return res.json(user.publicData());
+  }).catch(next);
 }
 
 function modificarUsuario(req, res, next) {                   //Modificando Usuario de MongoDB

@@ -17,9 +17,8 @@ const mongoose = require("mongoose");
 var isProduction = process.env.NODE_ENV === 'production';
 
 mongoose.connect(
-//   process.env.MONGODB_URI, // obtiene la url de conexión desde las variables de entorno
-//   { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true }
-"mongodb+srv://Charly:Pac26116@cluster0.gyjue.mongodb.net/BookCrossing?retryWrites=true&w=majority"
+  process.env.MONGODB_URI, // obtiene la url de conexión desde las variables de entorno
+  { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true }
 );
 
 mongoose.set("debug", true);

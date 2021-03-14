@@ -14,7 +14,6 @@ app.use(bodyParser.json());
 
 /*********************** Mongoose Configuration *******************************/
 const mongoose = require("mongoose");
-
 var isProduction = process.env.NODE_ENV === 'production';
 
 mongoose.connect(
@@ -34,9 +33,9 @@ require("./models/Intercambio");
 /*********************** Mongoose Configuration *******************************/
 
 // Agregamos el código de nuestro router (routes/index.js)
-var swaggerUi = require('swagger-ui-express')
-var swaggerDocument = require('./swagger.json')
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+// var swaggerUi = require('swagger-ui-express')
+// var swaggerDocument = require('./swagger.json')
+// app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use('/v1', require('./routes'));
 
 

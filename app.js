@@ -15,8 +15,15 @@ app.use(bodyParser.json());
 /*********************** Mongoose Configuration *******************************/
 const mongoose = require("mongoose");
 
+// mongoose.connect(
+//     "mongodb+srv://Charly:Pac26116@cluster0.gyjue.mongodb.net/BookCrossing?retryWrites=true&w=majority"
+// );
+
+var isProduction = process.env.NODE_ENV === 'production';
+
 mongoose.connect(
-    "mongodb+srv://Charly:Pac26116@cluster0.gyjue.mongodb.net/BookCrossing?retryWrites=true&w=majority"
+  process.env.MONGODB_URI, // obtiene la url de conexión desde las variables de entorno
+  { useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true }
 );
 
 mongoose.set("debug", true);
